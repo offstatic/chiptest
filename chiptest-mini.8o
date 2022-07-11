@@ -1,0 +1,58 @@
+: 1N
+	0xCE 0x4A 0x4A 0xEA
+
+: AN
+	0xEE 0xAA 0xEA 0xAA
+
+: 6X
+	0xEA 0x84 0xE4 0xEA
+
+: DX
+	0xCA 0xA4 0xA4 0xCA
+
+: pass
+	0x00 0x10 0xA0 0x40
+
+: fail
+	0x00 0xA0 0x40 0xA0
+
+: 1N-check
+	i := pass
+	jump 0x22C
+
+: main
+	v0 := 17
+	v1 := 10
+	i := 1N
+	sprite v0 v1 4
+	v0 := 25
+	i := fail
+	jump 0x21A
+	sprite v0 v1 4
+
+	v0 := 17
+	v1 := 17
+	i := AN
+	sprite v0 v1 4
+	v0 := 25
+	i := pass
+	sprite v0 v1 4
+
+	v0 := 35
+	v1 := 10
+	i := 6X
+	sprite v0 v1 4
+	v0 := 43
+	i := pass
+	sprite v0 v1 4
+
+	v0 := 35
+	v1 := 17
+	i := DX
+	sprite v0 v1 4
+	v0 := 43
+	i := pass
+	sprite v0 v1 4
+
+	loop
+	again

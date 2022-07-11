@@ -1,0 +1,490 @@
+: failed
+	0x00 0xA0 0x40 0xA0
+
+# unused
+: _
+	0x00 0x00
+
+: passed
+	0x00 0x10 0xA0 0x40
+
+: random_1
+	0x00 0x00 0x00
+
+: random_2
+	0x3
+
+: random_3
+	0x1
+
+: op
+	0xFF 0x88 0xAA 0xA8 0x8B
+
+: box
+	0x80 0xC0 0xE0 0xC0 0x80	
+
+: 8X
+	0xFF 0x8A 0x8D 0xAD 0x8A
+
+: FX
+	0xFF 0x8A 0xBD 0x8D 0xBA
+
+: 3X
+	0xEA 0x64 0x24 0xEA
+
+: 4X
+	0xAA 0xA4 0xE4 0x2A
+
+: 5X
+	0xEA 0x84 0x64 0xEA
+
+: 7X
+	0xEA 0x24 0x24 0x2A
+
+: 9X
+	0xEA 0xA4 0xE4 0x2A
+
+: AN
+	0xEE 0xAA 0xEA 0xAA
+
+: BN
+	0xCE 0xCA 0xAA 0xEA
+
+: CX
+	0xEA 0x84 0x84 0xEA
+
+: Y0
+	0xAE 0xEA 0x4A 0x4E
+
+: Y1
+	0xAC 0xE4 0x44 0x4E
+
+: Y2
+	0xAE 0xE2 0x4C 0x4E
+
+: Y3
+	0xAE 0xE6 0x42 0x4E
+
+: Y4
+	0xAA 0xEA 0x4E 0x42
+
+: Y5
+	0xAE 0xE8 0x46 0x4E
+
+: Y6
+	0xAE 0xE8 0x4E 0x4E
+
+: Y7
+	0xAE 0xE2 0x42 0x42
+
+: YE
+	0xAE 0xEC 0x48 0x4E
+
+: F7
+	0xEE 0xA2 0xA2 0xE2
+
+: F15
+	0xCE 0x48 0x46 0xEE
+
+: F1E
+	0xCE 0x4C 0x48 0xEE
+
+: F29
+	0xEE 0x2E 0xC2 0xEE
+
+: F33
+	0xEE 0x66 0x22 0xEE
+
+: F55
+	0xEE 0x88 0x66 0xEE
+
+: F65
+	0xEE 0x88 0xE6 0xEE
+
+: print_r1
+	ve := 1
+	sprite vd ve 4
+;
+
+: print_r2
+	ve := 6
+	sprite vd ve 4
+;
+
+: print_r3
+	ve := 12
+	sprite vd ve 4
+;
+
+:	print_r4
+	ve := 17
+	sprite vd ve 4
+;
+
+: print_r5
+	ve := 23
+	sprite vd ve 4
+;
+
+: print_r6
+	ve := 28
+	sprite vd ve 4
+;
+
+: reset
+	v0 := 0x1
+	v1 := 0x2
+;
+
+: main
+	######################
+	#### op
+	######################
+	
+	#### row 1
+	i := op
+	vd := 0
+	ve := 0
+	sprite vd ve 5
+	i := box
+	vd := 8
+	sprite vd ve 5
+
+	i := 3X
+	vd := 13
+	print_r1
+
+	i := 4X
+	vd := 26
+	print_r1
+
+	i := 5X
+	vd := 39
+	print_r1
+
+	i := 7X
+	vd := 52
+	print_r1
+
+	#### row 2
+	i := 9X
+	vd := 0
+	ve := 6
+	sprite vd ve 4
+
+	i := AN
+	vd := 13
+	print_r2
+
+	i := BN
+	vd := 26
+	print_r2
+
+	i := CX
+	vd := 39
+	print_r2
+
+	#### row 3
+	i := 8X
+	vd := 0
+	ve := 11
+	sprite vd ve 5
+	i := box
+	vd := 8
+	sprite vd ve 5
+
+	i := Y0
+	vd := 13
+	print_r3
+
+	i := Y1
+	vd := 26
+	print_r3
+
+	i := Y2
+	vd := 39
+	print_r3
+
+	i := Y3
+	vd := 52
+	print_r3
+
+	#### row 4
+	i := Y4
+	vd := 0
+	ve := 17
+	sprite vd ve 4
+
+	i := Y5
+	vd := 13
+	print_r4
+
+	i := Y6
+	vd := 26
+	print_r4
+
+	i := Y7
+	vd := 39
+	print_r4
+
+	i := YE
+	vd := 52
+	print_r4
+
+	#### row 5
+	i := FX
+	vd := 0
+	ve := 22
+	sprite vd ve 5
+	i := box
+	vd := 8
+	sprite vd ve 5
+
+	i := F7
+	vd := 13
+	print_r5
+
+	i := F15
+	vd := 26
+	print_r5
+
+	i := F1E
+	vd := 39
+	print_r5
+
+	i := F29
+	vd := 52
+	print_r5
+
+	#### row 6
+	i := F33
+	vd := 0
+	ve := 28
+	sprite vd ve 4
+
+	i := F55
+	vd := 13
+	print_r6
+
+	i := F65
+	vd := 26
+	print_r6
+
+	######################
+	#### tests
+	######################
+
+	# todo 00ee
+
+	# 3XNN
+	v0 := 0x1
+	i := passed
+	if v0 != 0x1 then i := failed
+	vd := 21
+	print_r1
+
+	# 4XNN
+	v0 := 0x1
+	i := passed
+	if v0 == 0x2 then i := failed
+	vd := 34
+	print_r1
+
+	# 5XY0
+	v0 := 0x1
+	v1 := 0x1
+	i := passed
+	if v0 != v1 then i := failed
+	vd := 47
+	print_r1
+
+	# 7XNN
+	v0 := 0x1
+	i := failed
+	v0 += 0x1
+	if v0 == 0x2 then i := passed
+	vd := 60
+	print_r1
+
+	# 9XY0
+	reset
+	i := passed
+	if v0 == v1 then i := failed
+	vd := 8
+	print_r2
+
+	# ANNN
+	# redundant
+	# no image will load without ANNN
+	i := passed
+	vd := 21
+	print_r2
+
+	# BNNN
+	v0 := 0x1
+	i := passed
+	# jump0 address should skip the next line
+	jump0 0x3BC
+	i := failed
+	vd := 34
+	print_r2
+
+	# CXNN
+	# there's a 1 in 256 chance that v0 could be
+	# 0x1 resulting in a false positive
+	v0 := 0x1
+	v0 := random 0xFF
+	i := passed
+	if v0 == 0x1 then i := failed
+	vd := 47
+	print_r2
+	
+	# 8XY0
+	reset
+	v1 := v0
+	i := failed
+	if v1 == v0 then i := passed
+	vd := 21
+	print_r3
+
+	# 8XY1
+	reset
+	v1 |= v0
+	i := failed
+	if v1 == 0x3 then i := passed
+	vd := 34
+	print_r3
+
+	# 8XY2
+	reset
+	v1 &= v0
+	i := failed
+	if v1 == 0x0 then i := passed
+	vd := 47
+	print_r3
+
+	# 8XY3
+	reset
+	v1 ^= v0
+	i := failed
+	if v1 == 0x3 then i := passed
+	vd := 60
+	print_r3
+	
+	# 8XY4
+	# carry check not implemented
+	reset
+	v1 += v0
+	i := failed
+	if v1 == 0x3 then i := passed
+	vd := 8
+	print_r4
+
+	# 8XY5
+	reset
+	v1 -= v0
+	i := failed
+	if v1 == 0x1 then i := passed
+	vd := 21
+	print_r4
+
+	# 8XY6
+	# ambiguity between vx and vy
+	reset
+	v2 := 0x3
+	v1 >>= v2
+	i := failed
+	if v1 == 0x1 then i := passed
+	vd := 34
+	print_r4
+
+	# 8XY7
+	reset	
+	v2 := 0x3
+	v1 =- v2
+	i := failed
+	if v1 == 0x1 then i := passed
+	vd := 47
+	print_r4
+
+	# 8xYE
+	# ambiguity between vx and vy
+	reset
+	v2 := 0x3
+	v1 <<= v2
+	i := failed
+	if v1 == 0x4 then i := passed
+	vd := 60
+	print_r4
+
+	# FX07/FX15
+	# fails if emulation is slow
+	v1 := 0xF
+	delay := v1
+	v0 := delay
+	i := failed
+	if v0 == 0xF then i := passed
+	vd := 21
+	print_r5
+	vd := 34
+	print_r5
+
+	# FX1E
+	# make sure failed/passed is at memloc 202/208
+	i := failed
+	v2 := 0x6
+	i += v2
+	vd := 47
+	print_r5
+
+	# FX29
+	# doesn't work in octo as fx29 is masked
+	i := failed
+	v2 := 0x68
+	i := hex v2
+	vd := 60
+	print_r5
+
+	#FX33
+	v0 := 0x0
+	v1 := 0x0
+	v2 := 0x0
+	v3 := 0x7B   # 123
+	i := random_1
+	bcd v3
+	i := random_1
+	load v2
+	i := passed
+	if v0 != 0x1 then i := failed
+	if v1 != 0x2 then i := failed
+	if v2 != 0x3 then i := failed
+	vd := 8
+	print_r6
+
+	# FX55
+	v0 := 0x1
+	# save v0 to i
+	i := random_2
+	save v0
+	# change value of v0
+	v0 := 0x2
+	#load v0 from i
+	i := random_2
+	load v0
+	# check if v0 is still the original value
+	i := failed
+	if v0 == 0x1 then i := passed
+	vd := 21
+	print_r6
+
+	# FX65
+	v0 := 0x0
+	i := random_3
+	load v0
+	i := failed
+	if v0 == 0x1 then i := passed
+	vd := 34
+	print_r6
+
+	loop
+	again
