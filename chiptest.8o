@@ -413,7 +413,7 @@
 	v2 := 0x3
 	v1 <<= v2
 	i := failed
-	if v1 == 0x4 then i := passed
+	if v1 == 0x6 then i := passed
 	vd := 60
 	print_r4
 
